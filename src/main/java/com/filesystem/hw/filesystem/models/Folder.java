@@ -25,15 +25,15 @@ public class Folder {
     @OneToMany(mappedBy = "folder", fetch=FetchType.LAZY)
     @JsonIgnoreProperties({"folder"})
     private List<File> files;
-//
-//    @ManyToOne
-//    @JoinColumn(name="user_id", nullable = false)
-//    @JsonIgnoreProperties({"folders"})
-//    private User user;
 
-    public Folder(String title) {
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable = false)
+    @JsonIgnoreProperties({"folders"})
+    private User user;
+
+    public Folder(String title, User user) {
         this.title = title;
-//        this.user = user;
+        this.user = user;
         this.files = new ArrayList<>();
     }
 
@@ -55,13 +55,13 @@ public class Folder {
         this.title = title;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<File> getFiles() {
         return files;
